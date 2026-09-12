@@ -35,7 +35,6 @@ oauthlib==3.3.1
 oscrypto==1.3.0
 pillow==12.3.0
 propcache==0.5.2
-psycopg2==2.9.13
 psycopg2-binary==2.9.13
 pycparser==3.0
 pyHanko==0.37.0
