@@ -27,7 +27,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f :
 DEBUG = True
 
 # ALLOWED_HOSTS = ['leafnotion.com','103.133.214.130', 'www.leafnotion.com','*'] 
-ALLOWED_HOSTS = [ ] 
+ALLOWED_HOSTS = [ '*' ] 
 # Application definition
 
 INSTALLED_APPS = [
@@ -164,13 +164,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #need to confrigru
 
 ACCOUNT_ACTIVATION_DAYS = 1
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL: False
-SERVER_EMAIL = 'sharma.mohan57698@gmail.com'
-EMAIL_HOST_USER = 'sharma.mohan57698@gmail.com'
-EMAIL_HOST_PASSWORD = 'kjmaxnogucxxsvbv'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL: False
+# SERVER_EMAIL = 'sharma.mohan57698@gmail.com'
+# EMAIL_HOST_USER = 'sharma.mohan57698@gmail.com'
+# EMAIL_HOST_PASSWORD = 'kjmaxnogucxxsvbv'
 
 
 ''''
