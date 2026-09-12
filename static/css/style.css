@@ -1,0 +1,111 @@
+\* style sheet comment *\
+
+
+
+.footer {
+    position: relative;
+    padding-top: 90px;
+    background: #2c3035;
+}
+
+.footer .footer-about,
+.footer .footer-link {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+@media(min-width: 992px) {
+    .footer .container:first-child {
+        max-width: 960px;
+        margin-bottom: 30px;
+    }
+    
+    .footer .footer-about,
+    .footer .footer-link {
+        padding: 0 30px;
+    }
+}
+
+.footer .footer-about h2,
+.footer .footer-link h2 {
+    position: relative;
+    margin-bottom: 45px;
+    padding-bottom: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999999;
+}
+
+.footer .footer-about h2::after,
+.footer .footer-link h2::after{
+    position: absolute;
+    content: "";
+    width: 60px;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to left, #999999, #ffffff, #999999);
+    border-radius: 0 100% 100% 0; 
+}
+
+.footer .footer-about p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.footer .footer-about p i {
+    width: 20px;
+}
+
+.footer .footer-link a {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #999999;
+    
+}
+
+.footer .footer-link a::before {
+    position: relative;
+    content: "\f0da";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .footer-link a:hover {
+    color: #ffffff;
+}
+
+.footer .copyright {
+    padding: 15px;
+    border-top: 1px solid #3b3e43;
+}
+
+.footer .copyright p {
+    margin: 0;
+    font-size: 14px;
+    color: #999999;
+}
+
+.footer .copyright .col-md-6:last-child p {
+    text-align: right;
+}
+
+.footer .copyright p a {
+    color: #999999;
+}
+
+.footer .copyright p a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .footer .copyright p,
+    .footer .copyright .col-md-6:last-child p {
+        margin: 5px 0;
+        text-align: center;
+    }
+}

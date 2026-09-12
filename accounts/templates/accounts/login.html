@@ -1,0 +1,105 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+   Join your friends on Leafnotion.
+{% endblock title%}
+
+<!-- meta tags for seo -->
+{% block meta %}
+
+    <meta name="description" content= "We try to make people more connected socially & friendly to 
+                                      build better social culture while being open to People & Close to Privacy. 
+                                       Login to Leafnotion Connect, Watch, Discover and Share Your Notion with your firends, or Register yourself Today to unlock the door of possiblity.">
+  <meta name="keywords" content=" Social Media , leafnote, leafnation , indian , Leafnotion , Learnincreation , Indian Social Media , Social networking website, Social networking, facebook, instagram, twitter, snapchat, competitor, indian, social , network, vinay bhatt">
+  <meta name="author" content="Leafnotion">
+
+
+{% endblock meta %}
+
+{% block navbar %}
+    
+  <nav class="navbar navbar-expand-lg navbar-white bg-white">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+       
+      
+        <a class="nav-link mt-3 " href="{% url 'home' %}" > Home </a>
+        <a class="nav-link mt-3 text-primary " href="{% url 'registerpage' %}">Sign Up</a>
+        
+       
+       <span class="navbar-text mt-3">
+       Welcome To Leafnotion
+    </span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+{% endblock navbar %}
+
+
+{% block content %}
+
+
+     
+   <!-- Header section -->
+   
+   <!-- image-div-->
+   
+
+
+       <div class="container" style="margin:auto; padding:auto; margin-top: 80px;">
+        <div class="row" >   
+               <div>
+                  <img  src="{% static 'landing/images/account-design-2.png' %}" style="width:inherit; height:auto;" alt="learnincreation-banner-image">      
+               </div>
+        </div>
+    </div>
+    
+   <!-- form div --> 
+
+    <div class="container " >    
+        <div class="row" style="margin-bottom:100px;  line-height: 25px;" >   
+                   <h2> <strong> Be Social, Share and  <span style="color:orange;"> Connect !</span> </strong></h2>
+                   <div class="col-sm-12 md-10 lg-10 " style="margin: auto; padding: 20px;">
+                    
+                      <form method="POST">
+                        {% csrf_token %}
+                        {{ login_form|crispy }}
+                        <button class="btn btn-primary active btn-block btn-sm  mt-3" type="submit">Login</button>
+                      </form>
+                    </div>
+                    <p class="text-center">
+                     {% if messages %}
+						<ul class="messages">
+    					{% for message in messages %}
+    						<p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    					{% endfor %}
+						</ul>
+					{% endif %}
+                      <a href="{% url 'password_reset' %}">Forget Password ?</a></p><hr>
+                    <p class="text-center"> Don't have an account yet? <a href="{% url 'registerpage' %}">Create an account</a> instead.</p>
+        			 <p class="text-center" style="font-size: 12px;"> By continuing, you agree to our cookies policy,  Terms of Uses and <a href="/privacy-policies/" style="text-decoration: none;"> Privacy Policies.</a>
+    				</p>
+                  </div>
+                 </div> 
+
+  
+   <!-- Header section end -->
+
+     
+</div> <!-- main body container end --> 
+
+
+
+
+{% endblock content %}

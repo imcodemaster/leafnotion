@@ -1,0 +1,155 @@
+{% extends 'landing/main.html' %}
+{% load static %}
+
+{% block title %}
+    Think with Leafnotion 
+{% endblock title %}
+
+<!-- meta tags for seo -->
+{% block meta %}
+    <meta name="description" content="Leafnotion is a Social Networking Website  where you can
+  Be Social With Your Friend, Family and People around the World and can increase your Social Family,
+Engage with Social Edge and Share Your Notion, What's  happening..,
+ Stories and Video upto 100 mb. while Being Secure on India's New Social Media ! Log in Today on Leafnotion">
+  <meta name="keywords" content="leafnotion, Leafnotion , leaf, note, notes, leafnote, learnincreation, social, networking website, social media website, trending on Twitter, Twitter, Facebook,Instagram, leafnotion.com,  new social media, social Media , facebook , twitter, social networking website ">
+  <meta name="author" content="Learnincreation">
+{% endblock meta %}
+
+
+
+
+<!-- navbar section -->
+{% block navbar %}
+  
+  
+  
+  <nav class="navbar navbar-expand-lg navbar-white bg-white">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        
+        <a class="nav-link " href="{% url 'about' %}">About</a>
+      
+        <a class="nav-link active "  aria-current="page"  href="{% url 'think-list' %}">Think With </a>
+        <a class="nav-link" href="{% url 'contact' %}">Contact </a>
+        {% if user.is_authenticated %}
+           <a class="nav-link" href="{% url 'setting' %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+  				<path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+				</svg>
+      </a>
+        {% else %}
+      <a class="nav-link text-primary " href="{% url 'login' %}"><button class='btn btn-primary btn-sm active shadow-sm'> Sign in </button></a>
+        {% endif %}
+        
+       
+        <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+      </div>    </div>
+  </div>
+</nav>
+
+
+{% endblock navbar %}
+
+<!-- nav bar section end -->
+
+{% block content %}
+
+
+<main id="main" class="bg bg-white mt-1 pt-1">
+
+
+	<div class="container  mb-5">
+		<div class="row mt-1 pt-1">
+			<nav class="navbar fixed-bottom navbar-light bg-white text-dark shadow-sm">
+
+			  <a class="navbar-brand p-2" href="{% url 'post-list' %}"> 
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+				  <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+				  <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+				</svg>
+			  </a>
+
+
+
+
+			  <a class="navbar-brand p-2" href="{% url 'home' %}">
+			  	    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+  		<path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+  		<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+		</svg>
+			  </a> 
+
+		 {% if user.is_authenticated %}
+			  <a class="navbar-brand p-2" href="{% url 'setting' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+  				<path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+				</svg>
+			  </a>
+
+		 {% endif %}
+			  <a class="navbar-brand p-2" href="{% url 'video-list' %}">
+			   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+				  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+				</svg>
+			</a>
+			
+			<!-- <a class="navbar-brand" href="#">
+			 	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+				  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+				</svg>
+			 </a> -->
+			  
+			</nav>
+		</div>
+</div>
+</main
+
+
+   <div class="container" style="margin:auto; padding:auto;">
+        <div class="row" >   
+               <div class="mt-5 ">
+                  <img  src="{% static 'landing/images/think-banner.png' %}" style="width:inherit; height:auto;" alt="learnincreation-banner-image">      
+               </div>
+        </div>
+    </div>
+
+
+<div class="container mt-5">
+        <div class="row ">
+          <h1 class="p-3">Think With <span style="color:orange; font-weight: bold;"> - LeafNotion </span> </h1>
+          <div class="col-md-8 p-3">
+            {% for think in think_list %}
+            <div class="card card-signin my-5 shadow p-4">
+              <div class="card-body">
+                <a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ think.author }}</b></a>
+                <br><small class="text-muted">Posted on {{ think.published }}</small>
+                <br><br>
+                <p class="card-text text-dark">{{ think.title }}</p>
+              </div>
+            </div>
+            <hr>
+            {% endfor %}
+           </div>
+
+           <div class="col-md-4 p-3 ">
+            <div class="card card-signin m-3 shadow p-4 bg-primary">
+              <div class="card-body  text-white">
+                <h2> <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-smartwatch" viewBox="0 0 16 16">
+  <path d="M9 5a.5.5 0 0 0-1 0v3H6a.5.5 0 0 0 0 1h2.5a.5.5 0 0 0 .5-.5V5z"/>
+  <path d="M4 1.667v.383A2.5 2.5 0 0 0 2 4.5v7a2.5 2.5 0 0 0 2 2.45v.383C4 15.253 4.746 16 5.667 16h4.666c.92 0 1.667-.746 1.667-1.667v-.383a2.5 2.5 0 0 0 2-2.45V8h.5a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H14v-.5a2.5 2.5 0 0 0-2-2.45v-.383C12 .747 11.254 0 10.333 0H5.667C4.747 0 4 .746 4 1.667zM4.5 3h7A1.5 1.5 0 0 1 13 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 3 11.5v-7A1.5 1.5 0 0 1 4.5 3z"/>
+</svg> </h2> <br>
+                 Get update with our notice, announcement, upcoming events from Office. Also help us to keep the community enviourment respectful and clean, or report to us if you see any in-appropiate post with related details.
+
+              </div>
+            </div>
+           </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

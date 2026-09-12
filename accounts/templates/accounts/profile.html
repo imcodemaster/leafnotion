@@ -1,0 +1,380 @@
+bemy{% extends 'landing/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+ {{user.first_name}} {{user.last_name}} Profile on Leafnotion 
+{% endblock title %}
+
+<!-- meta tags for seo -->
+{% block meta %}
+
+    <meta name="description" content= " {{user.first_name}} {{user.last_name}}. Bio . {{user.profile.bio}} Profile on Leafnotion. Join Leafnotion and share your notion , videos with your mates or firends! Log in today ! ">
+  <meta name="keywords" content="leafnotion, leafnote, leafnation, instagram , social media  , online , business, how to , build , business profile ,  commmunity standards ">
+  <meta name="author" content="Learnincreation">
+
+{% endblock meta %}
+
+{% block navbar %}
+
+<nav>
+
+	 <!--{% if user.profile.mediaURL %}
+<a href="{% url 'profile' user.profile.pk %}">
+ <img src="{{ user.profile.picture.url }}" class="rounded-circle p-1" width="40" height="40"  style="">
+</a>
+ {% endif %} -->
+<small class="text-muted">    
+<form class="form" action="{% url 'search-user' %}" method="get" style="float: right;">
+        <input class="flex-grow bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mr-4 mb-1 sm:mb-0 mt-0" type="search" name = 'queryuser' placeholder="Search for friend" aria-label="search" >
+        <!--<button  type = 'submit'><img src="/static/images/searchicon.png" style="width:20px; height:20px; margin-left:5px;" ></img> </button>-->
+        <button class="text-dark btn btn-sm btn-white active" type = 'submit'>
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg>   
+</button>
+      </form>
+</small>
+            
+</nav>
+{% endblock navbar%}
+
+
+
+
+{% block content %}
+ <main id="main" class="bg bg-light mt-1 pt-1">
+
+
+	<div class="container  mb-5">
+		<div class="row mt-1 pt-1">
+			<nav class="navbar fixed-bottom navbar-light bg-white text-dark shadow-sm">
+
+			  <a class="navbar-brand p-2" href="{% url 'post-list' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+				  <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+				  <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+				</svg>
+			  </a>
+
+
+
+
+			  <a class="navbar-brand p-2" href="{% url 'post-create' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+				  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+				  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+				</svg>
+			  </a>
+
+
+			  <a class="navbar-brand p-2" href="{% url 'video-create' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+				  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+				  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+				</svg>
+			  </a>
+
+
+			  <a class="navbar-brand p-2" href="{% url 'video-list' %}">
+			   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+				  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+				</svg>
+			</a>
+			
+			<!-- <a class="navbar-brand" href="#">
+			 	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+				  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+				</svg>
+			 </a> -->
+			  
+			</nav>
+		</div>
+    
+<div class="container">
+     <!-- aleart on site -- attentive or attraction on CTA  --> 
+    <div class="container-fluid" style = "margin-top:100px; padding-left:50px; shadow">
+       <small> Manage your own Account setting and don't forget to regulalry update your password from <a href="{% url 'setting' %}">setting</a> page.<br> Enter your birth date in - <code>year-month-date</code> format. 
+                Mobile field contain only 10 digits, if your mobile digits are greater (if you are form outside of India) leave that field blank (same for state field).
+                Also, <abbr title= " It's your responsiblity to Treat everybody like the way you want to be Treated. Being Social is a sign of being Responsible. "> Respect </abbr> every person on portal. Read <a href="{% url 'community' %}">community guidance </a> for details </small>
+    </div> 
+    <hr>
+    <div class="row mt-5">
+        <div class="col-md-3 col-sm-6 mt-1">
+            <a href="{% url 'indexpage' %}" class="btn btn-dark text-white m-1"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+            </svg> Back
+        </a>           
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5 p-3">
+        <div class="card col-md-8 col-sm-12 px-5 pt-3 shadow mb-5" style="border-radius: 20px;">
+           <div class="row">
+            
+            {% if profile.picture %}
+                <div class="col-md-3 sm-3 lg-3"> 
+                    <img src="{{ profile.picture.url }}"  width="80" height="80"  style="float: center; border-radius: 20px; float: right;">
+
+                </div>
+                {% endif %}
+
+                <div class="col-md-9 sm-9 lg-9 mt-4" style="font-size: 15px;" > 
+
+                    {% if user.first_name %}
+                        <h3 class="m-1 p-2 justify-content-center" style="margin-left: 2px;">{{ user.first_name }} {{user.last_name}} <br> </h3>
+                    {% endif %}
+
+                    {% if user == request.user %}
+                    <h5 class="p-1 m-1 justify-content-center">
+                        <small class="text-primary m-1 p-2"><a href="{% url 'profile' profile.pk %}"> <code>@{{user.username}}</code></a>
+                    </small>
+                </h5>
+                {% endif %}
+            </div>
+
+        </div>
+        <hr>
+                <div class="row pb-4">
+                
+                <div class="col-md-5 sm-5 lg-5 m-1">
+                    {% if user == request.user %}
+                        <span class="m-2 p-2 text-muted" style = 'font-size:14px;'>People love to hear You ! </span>
+                    {% else %}
+                       <span class="m-2 p-2 text-muted" style = "font-size:14px;">Love to hear from this person ?</span>
+                    
+                    
+                    {% endif %}
+                </div>
+
+                {% if  user == request.user %}
+                    <div class="col-md-3 sm-3 lg-3 m-1">
+                       <span class="m-2 p-2"><h7> <a href="{% url 'followers' profile.pk %}" style="text-decoration: none;" class="text-dark"> Followers </a> </h7> {{number_of_followers}}</span>
+                </div>
+                {% else %}
+                <div class="col-md-3 sm-3 lg-3 m-1">
+                       <span class="m-2 p-2"><h7>  Followers </h7> {{number_of_followers}}</span>
+                </div>
+                {% endif %}
+                  <div class="col-md-1 sm-1 lg-1 m-1"> 
+                   
+                    {% if user == request.user %}
+                    {% else %}
+                    {% if is_following %}
+                    <form method="POST" action="{% url 'remove-follower' profile.pk %}" class = 'm-2'>
+                    {% csrf_token %}
+                        <button class="btn btn-sm btn-dark text-white"> <span style="font-size:12px;"> Unfollow  </span> </button> 
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'add-follower' profile.pk %}" class = 'm-2'>
+                    {% csrf_token %}
+                        <button class="btn btn-primary active btn-sm text-white"><span style="font-size:12px;"> Follow </span> </button> 
+                    </form>
+                    {% endif %}
+                    {% endif %}
+                
+            
+
+                </div>
+              
+            </div>
+                
+
+
+    </div>
+                <hr>
+                <div class="m-1 p-2 mb-4" style="font-size: 20px;  font-weight: normal;">
+                    {% if user == request.user %}
+                    <span>username : <code>{{ user.username }}</code></span><br>
+                   {% if profile.birth_date %}
+                     Born  : {{ profile.birth_date }} </span>
+                    {% endif %} 
+    				{% endif %}
+
+                    {% if profile.bio %}
+                    <span> Bio :  {{ profile.bio }}</span>
+                    {% endif %}
+                    
+                    {% if profile.academicbackground %}
+                    <hr>
+                    <span>Education : {{ profile.academicbackground }}</span> 
+                    {% endif %}
+                     <br>
+                    {% if profile.school_name %}
+                    <span>Studies @  {{ profile.school_name }}</span>
+                    {% else %}
+                    <span>Studies @ Learnincreation Geeks</span>
+                    {% endif %}
+                    
+                    {% if profile.relationship %}
+                    <hr>
+                    <span>Relationship : {{ profile.relationship }}</span>
+                    {% endif %} 
+                    
+                     {% if profile.country %}
+                    <hr>
+                    <span>Country : {{ profile.country }}</span> <br>
+                    {% endif %}
+                     {% if profile.country == 'India' %}
+                    <span>State : {{ profile.state }}</span> |
+                    {% endif %}
+                    {% if profile.region %}
+                    <span>Region : {{ profile.region }}</span>
+                    {% endif %}
+                    
+                    {% if profile.address %}
+                    <hr>
+                    <span>Lives in : {{ profile.address }}
+                                ,
+                            {% if profile.address_line_2 %}
+                                <span> {{ profile.address_line_2 }}</span>
+                                 {% endif %}
+                    </span>
+                     {% endif %}
+                    <br>connect : {{user.email}} 
+
+                   {% if user == request.user %}
+                    <hr>
+                    <a href="{% url 'profile-edit' user.profile.pk %}" class="btn btn-sm btn-primary m-1">Edit </a>
+                    <a href="{% url 'profile-pdf' %}" class="btn btn-sm btn-outline-dark m-1" target="--blank">Download Profile Pdf</a>
+                {% endif %}
+                </div>
+        </div>
+    </div>
+
+         <!-- <div class="row m-5 p-5 ">
+  --------------------followers list -------------------   
+</div> -->
+
+<hr>
+
+<div class="row p-3" style="margin:auto; padding: auto; ">
+        <div class="col-md-5 lg-5 sm-12 m-3 p-3" >  
+          <h6> Stories  shared -</h6> 
+          <hr>
+
+                {% for post in posts %} 
+            <div>
+
+          <div class="card m-2 shadow p-3 mb-5 bg-white rounded" style="width: inherit;"  >
+
+            <a href="{% url 'profile' post.author.profile.pk %}" style="text-decoration: none;" class="text-dark">
+              <h6 class="p-1" style="font-weight: bolder;">{{post.author.first_name}} {{post.author.last_name}} 
+              <span style="font-weight: lighter; font-size: 13px;">
+               {% if post.feeling %}
+                feels {{post.feeling}}
+               {% endif %}
+               {% if post.activity %}
+                 while doing {{post.activity}}
+               {% endif %}
+              </span>
+          </h6></a>
+             <small class="text-muted p-1">Published on : {{post.published}}</small>
+             <hr>
+            {% if post.mediaURL %}
+            <img class="card-img-top p-3" src="{{post.mediaURL}}" alt="Card image cap" width="200" height="450" style="border-radius: 25px;">
+            {% endif %}
+
+            <div class="card-body">
+              
+              <p class="card-title" style="text-transform:capitalize;">{{post.content}}</p>
+            
+            <hr>
+            <div class="btn-group" role="group" aria-label="reaction">
+
+              <!-- comment -->
+              <a href="{% url 'post-detail' post.pk %}" class=" font-weight-light" style="text-decoration: none;">
+        
+											   See full story  
+											  	
+														<!--<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+					  									<path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.118 8.118 0 0 1-3.078.132 3.659 3.659 0 0 1-.562-.135 1.382 1.382 0 0 1-.466-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
+														</svg> --> 
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+  <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+</svg>
+											   
+            </a>
+                <!-- share-notion-post -->
+              <!-- <button type="button" class="btn btn-outline-dark m-1">Share</button> -->
+            </div>
+                
+            </div>
+          </div>
+        </div>
+      {% endfor %}  
+
+      </div>
+
+         <div class="col-md-5 lg-5 sm-12 m-3 p-3" >  
+          <h6> Notion & Videos  posted - </h6>
+          <hr>
+                {% for watch in videos %}  
+            <div>
+
+          <div class="card m-2 shadow p-3 mb-5 bg-white rounded" style="width: inherit;"  >
+
+            <a href="{% url 'profile' watch.author.profile.pk %}" style="text-decoration: none;" class="text-dark">
+              <h6 class="p-1" style="font-weight: bolder;">{{watch.author.first_name}} {{watch.author.last_name}} 
+              <span style="font-weight: lighter; font-size: 13px;">
+               {% if watch.mediaURL %}
+                posted video
+                {% else %}
+                watch notion
+               {% endif %}
+              </span>
+          </h6></a>
+             <small class="text-muted p-1">Published on : {{watch.published}}</small>
+             <hr>
+            {% if watch.mediaURL %}
+            <video style="width: inherit; height: inherit;" controls>
+                <source src="{{watch.mediaURL}}" type="video/mp4">
+        
+              </video>
+            {% endif %}
+
+            <div class="card-body">
+              
+              <p class="card-title" style="text-transform:capitalize;">{{watch.subject}}</p>
+            
+            <hr>
+            <div class="btn-group" role="group" aria-label="reaction">
+
+              <!-- comment -->
+              <a href="{% url 'video-detail' watch.pk %}" class=" font-weight-light" style="text-decoration: none;">
+             
+											   See full Notion  
+											  	
+														<!--<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+					  									<path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.118 8.118 0 0 1-3.078.132 3.659 3.659 0 0 1-.562-.135 1.382 1.382 0 0 1-.466-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
+														</svg> --> 
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+  <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+</svg>
+											    </a>
+                <!-- share-notion-post -->
+              <!--<button type="button" class="btn btn-outline-dark m-1">Share</button>-->
+            </div>
+                
+            </div>
+          </div>
+        </div>
+      {% endfor %}  
+
+  
+        </div>
+
+</div>
+
+</div>
+
+
+
+{% endblock content %}
+
+<div class="card-body  text-white">
+                <h2> Help ! </h2> <br>
+                <p class="card-text ">Enter your birth date in - <code>year-month-date</code> format. <hr>
+                Mobile field contain only 10 digits, if your mobile digits are greater (if you are form outside of India) leave that field blank <hr>
+                Also, if any of the above details are fake your account will be suspended. Read <a href="{% url 'community' %}">community guidance </a> for details  </p>
+
+              </div>

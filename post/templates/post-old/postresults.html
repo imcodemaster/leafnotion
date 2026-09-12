@@ -1,0 +1,148 @@
+{% extends 'landing/main.html' %}
+{% load static %}
+
+{% block title %}
+
+Search Profile on Leafnotion
+
+{% endblock title %}
+
+{% block navbar %}
+
+<nav>
+   {% if user.profile.picture %}
+<a href="{% url 'profile' user.profile.pk %}">
+ <img src="{{ user.profile.picture.url }}" class="rounded-circle p-1" width="40" height="40"  style="">
+</a>
+ {% endif %}
+<small class="text-muted">    
+<form class="form" action="{% url 'search-user' %}" method="get" style="float: right;">
+        <input class="flex-grow bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mr-4 mb-1 sm:mb-0 mt-0" type="search" name = 'queryuser' placeholder="Search for friend.." aria-label="search" >
+        <!--<button  type = 'submit'><img src="/static/images/searchicon.png" style="width:20px; height:20px; margin-left:5px;" ></img> </button>-->
+        <button class="text-white btn btn-sm btn-primary active" type = 'submit'>Search</button>
+      </form>
+</small>
+            
+</nav>
+{% endblock navbar%}
+
+
+{% block content %}
+  <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+
+  <div class="container  mb-5">
+    <div class="row mt-1 pt-1">
+      <nav class="navbar fixed-bottom navbar-light bg-white text-dark shadow-sm">
+
+        <a class="navbar-brand p-2" href="{% url 'post-list' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+          <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+          <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        </svg>
+        </a>
+
+
+
+
+        <a class="navbar-brand p-2" href="{% url 'post-create' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+        </a>
+
+
+        <a class="navbar-brand p-2" href="{% url 'video-create' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+          <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+          <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+        </svg>
+        </a>
+
+
+        <a class="navbar-brand p-2" href="{% url 'video-list' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+				  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+				</svg>
+      </a>
+      
+      <!-- <a class="navbar-brand" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+          <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+        </svg>
+       </a> -->
+        
+      </nav>
+    </div>
+
+  <div class="container pt-5  mt-5">
+    <h6>
+      Matching Peoples Profile -
+    </h6>
+
+    <div class="row">
+                  {% for item in result %}
+                     {% if item in result %}
+                      <div class="row justify-content-center mt-5 p-3">
+                          <div class="card col-md-8 col-sm-12 px-5 pt-3 shadow mb-5" style="border-radius: 20px;">
+                             <div class="row">
+                              
+                              {% if item.profile.picture.url %}
+                                  <div class="col-md-3 sm-3 lg-3"> 
+                                      <img src="{{ item.profile.picture.url }}"  width="100" height="100"  style="float: center; border-radius: 20px; float: right;">
+
+                                  </div>
+                                  {% endif %}
+
+                                  <div class="col-md-9 sm-9 lg-9 mt-4" style="font-size: 15px;" > 
+
+                                  
+                                         <a href="{% url 'profile' item.id %}"> <h3 class="m-1 p-2 justify-content-center" style="margin-left: 2px;">{{ item.first_name }} {{item.last_name}} <br> </h3> </a>
+                                         <hr>
+                                          {% if item.profile.bio %}
+                                         <small>{{ item.profile.bio }} | 
+                                         {% endif %}   {% if item.profile.address %}
+                                       {{ item.profile.address }}
+                                       {% endif %}
+                                        {% if item.profile.address_line_2 %} {{ item.profile.address_line_2 }} 
+                                        {% endif %} </small>
+                                      
+
+                                  
+                              </div>
+
+                          </div>
+                          <hr>
+                      </div>
+
+                {% else %}
+
+                    <h6> Nothing here </h6>
+
+                {% endif %}
+
+            {% endfor %}
+           </div>
+        </div>
+
+      <!--  <div class="pagination" style="margin-top:-70px; margin-bottom:20px;">
+                  <span class="step-links">
+                      {% if page_obj.has_previous %}
+                          <a href="?page=1"><button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="button" name="button">&laquo; first</button></a>
+                          <a href="?page={{ page_obj.previous_page_number }}"><button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="button" name="button">previous</button></a>
+                      {% endif %}
+
+                      <span class="current">
+                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                      </span>
+
+                      {% if page_obj.has_next %}
+                          <a href="?page={{ page_obj.next_page_number }}"><button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="button" name="button">next</button></a>
+                          <a href="?page={{ page_obj.paginator.num_pages }}"><button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" type="button" name="button">last &raquo;</button></a>
+                      {% endif %}
+                  </span>
+              </div>-->
+        </main>
+
+{% endblock content %}

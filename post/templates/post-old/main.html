@@ -1,0 +1,138 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="icon" href="{% static 'landing/images/notion-logo.jpeg' %}" type="image/icon type">
+
+ 
+
+
+    <title>
+         {% block title %}
+      
+        {% endblock title %}
+
+    
+    </title>
+    
+
+
+  </head>
+  
+  <body style="background_color:#000; margin:auto padding:auto " >
+  
+ <!--navigation should be on bottom , try to give app experience -->
+
+    <nav>
+      <a href="{% url 'profile' user.profile.pk %}">
+       <img src="{{ user.profile.picture.url }}" class="rounded-circle p-1" width="40" height="40"  style="">
+      </a>
+      <small class="text-muted">    
+       <code>{{user.username}}</code>
+      </small>
+                  
+      </nav>
+
+
+ <main id="main" class="bg bg-light mt-1 pt-1">
+  <div class="container  mb-5">
+    <div class="row mt-1 pt-1">
+      <nav class="navbar fixed-bottom navbar-light bg-white text-dark shadow-sm">
+
+        <a class="navbar-brand p-2" href="{% url 'post-list' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+          <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+          <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        </svg>
+        </a>
+
+
+
+
+        <a class="navbar-brand p-2" href="{% url 'post-create' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+        </svg>
+        </a>
+
+
+        <a class="navbar-brand p-2" href="{% url 'video-create' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+          <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+          <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+        </svg>
+        </a>
+
+
+        <a class="navbar-brand p-2" href="{% url 'video-list' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+          <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+          <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+          <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
+        </svg>
+      </a>
+      
+      <!-- <a class="navbar-brand" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+          <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+        </svg>
+       </a> -->
+        
+      </nav>
+    </div>
+    {% block content %}
+ 
+    {% endblock content %}
+    
+
+<!-- footer section -->
+
+       <!-- Footer Start -->
+      <div class="footer bg-light text-dark " id="footer" style="background-color: #e8e8e8; " >
+      <hr>
+          <div class= "container" >
+              <div class="row">
+               <h5  class="text-dark ">  <span style = " text-align:right; "> India </h5> <p style="text-transform:uppercase;">   Welcome {{ user.username }} </p>
+                <span style="color: grey; font-size: 15px; "> BETA version </span>
+              </div>
+          </div>
+        
+                <hr>
+                <div class="container copyright mb-5">
+                    <div class="row">
+                        <div class="col-md-6 mb-5">
+                            <p>Copyright : &copy; 2022 <a href="{% url 'indexpage' %}"> Leafnotion</a> , All Right Reserved.</p>
+                            <hr>
+                            <a href="{% url 'policy' %}" style="padding:2px; text-decoration: none;">Policies</a>
+                               <a href="{% url 'terms' %}" style="padding:2px; text-decoration: none;">Terms</a>
+                               <!--<a href="{% url 'subscribe' %}" style="padding:2px;">Free Subscription</a> -->
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <p>From <a href="www.learnincreation.co.in">LearnInCreation</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    
+    
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+  
+  </body>
+</html>

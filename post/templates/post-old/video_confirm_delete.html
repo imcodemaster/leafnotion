@@ -1,0 +1,51 @@
+{% extends 'landing/main.html'%}
+{% load static %}
+{% block title %}
+
+Delete  - {{video.author.first_name}} {{video.author.last_name}} 
+ {% if video.mediaURL %}
+										  posted video
+										  {% else %}
+										  post notion
+										 {% endif %}
+{% endblock title %}
+{% block content %}
+<main id="main">
+
+
+<div class="container" style="margin-top: 70px; width: 100%;">
+	<h3> Does You Post Something Inappropiate ! </h3>
+	<h4> Wanna Delete Post ? </h4>
+	<div class="row">
+		
+		<div class="card shadow m-3" style=" width: 100% ">
+			 {% if object.mediaURL %}
+              
+              <video  style="width: 50%; height: 50%; margin: auto;padding: auto;" controls>
+                  <source src="{{object.mediaURL}}" type="video/mp4">
+          
+                </video>
+              
+            {% endif %}
+		  <div class="card-body">
+		    <h6 class="card-title">Delete -  {{object.subject}}</h6>
+		    <hr>
+		    <span class="text-dark text-small text-muted" style="font-weight: bold;">{{object.author}}</span>
+		    <span class="card-title text-small text-muted ">Published on  {{object.published | date}}</span>
+		    <form method="post">
+					{% csrf_token %}
+				    <p class="card-text"><b>Are you sure you want to delete ?</b></p>
+				    <button class="btn btn-danger m-1" type="submit" value="Confirm" > Yes, Delete </button>
+				    
+				</form>
+				
+				<a href="{% url 'video-list' %} " class="m-1"><button class="btn btn-primary" > Cancel </button></a>
+		  </div>
+		</div>
+		
+	</div>
+</div>
+
+</main>
+{% endblock content %}
+

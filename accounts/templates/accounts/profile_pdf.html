@@ -1,0 +1,165 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}
+ {% for profile in personprofile %} 
+ {{profile.user.first_name}} {{profile.user.last_name}} Profile in Leafnotion 
+ {% endfor %}
+{% endblock title %}
+
+
+
+{% block navbar %}
+ 
+ {% for profile in personprofile %} 
+  <h2>Leafnotion ( user - {{profile.user.first_name}} {{profile.user.last_name}} ) with ( username - {{profile.user.username}} ) Profile Pdf</h2>
+  
+ 
+       <hr>
+       <h4 class="navbar-text p-2" >
+        Share your Notion with Leafnotion
+    </h4>
+{% endfor %}
+
+{% endblock navbar %}
+
+
+
+
+{% block content %}
+
+{% for profile in personprofile %}
+
+
+<div class="container">
+     <!-- aleart on site -- attentive or attraction on CTA  --> 
+    <div class="container-fluid" style = "margin-top:10px; padding-left:50px; font-size: 13px;">
+       <small> Manage your own Account setting and don't forget to regulalry update your password from <a href="{% url 'setting' %}">setting</a> page.<br> Enter your birth date in - <code>year-month-date</code> format. 
+                Mobile field contain only 10 digits, if your mobile digits are greater (if you are form outside of India) leave that field blank (same for state field).
+                Also, <abbr title= " It's your responsiblity to Treat everybody like the way you want to be Treated. Being Social is a sign of being Responsible. "> Respect </abbr> every person on portal. Read <a href="{% url 'community' %}">community guidance </a> for details </small>
+    </div> 
+    <hr>
+    <div class="row mt-5">
+        <div class="col-md-3 col-sm-6 mt-1">
+            <a href="{% url 'indexpage' %}" class="btn btn-dark text-white m-1"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+            </svg> Back
+        </a>           
+        </div>
+    </div>
+    <div class="col-md-3 sm-3 lg-3"> 
+                    
+                    <img src="{{ profile.picture.url }}"  width="100" height="100"  style="float: center; border-radius: 20px; float: right;">
+
+                </div>
+
+
+
+    <div class="row justify-content-center mt-5 p-3">
+        <div class="card col-md-8 col-sm-12 px-5 pt-3 shadow mb-5" style="border-radius: 20px;">
+           <div class="row">
+          
+                
+
+                <div class="col-md-9 sm-9 lg-9 mt-4" style="font-size: 15px;" > 
+
+           
+                        <h3 class="m-1 p-2 justify-content-center" style="margin-left: 2px;">{{ profile.user.first_name }} {{profile.user.last_name}} <br> </h3>
+   
+
+                    
+                    <h5 class="p-1 m-1 justify-content-center">
+                        <small class="text-primary m-1 p-2"><a href="{% url 'profile' profile.pk %}"> <code>@{{profile.user.username}}</code></a>
+                    </small>
+                </h5>
+                
+            </div>
+
+        </div>
+        <hr>
+                <div class="row pb-4">
+                
+                <div class="col-md-5 sm-5 lg-5 m-1">
+                   
+                        <span class="m-2 p-2 text-muted">Pdf version of your profile generated on {{today}}. <b>{{profile.user.username}},</b> People love to hear you, keep your profile update and post informative notion with your friends/ followers. ! </span>
+                
+                    
+                    
+                
+                </div>
+
+
+                  
+              
+            </div>
+                
+
+
+    </div>
+                <hr>
+                <div class="m-1 p-2 mb-4" style="font-size: 20px;  font-weight: normal;">
+                    
+                    <span>Username : <code>{{ profile.user.username }}</code></span><br>
+                    {% if profile.birth_date %}
+                    <span>Date OF Birth  : {{ profile.birth_date }}</span> 
+                    {% endif %}
+                    {% if profile.bio %}
+                    <span>About : {{ profile.bio }}</span>
+                    {% endif %}
+                    {% if profile.academicbackground %}
+                    <span>Education : {{ profile.academicbackground }}</span> <br>                    
+                    {% endif %}
+                    {% if profile.school_name %}
+                    <span>Studies @  {{ profile.school_name }}</span>
+                    {% else %}
+                    <span>Studies @ Learnincreation Geeks</span>
+                    {% endif %}
+                    
+                    <hr>
+                    {% if profile.relationship %}
+                    <span>Relationship : {{ profile.relationship }}</span>
+                    {% endif %}
+                     {% if profile.country %}
+                    
+                    <hr>
+                    <span>Country : {{ profile.country }}</span> |
+                    {% endif %}
+                     {% if profile.country == 'India' %}
+                    <span>State : {{ profile.state }}</span> |
+                    {% endif %}
+                    {% if profile.region %}
+                    <span>Region : {{ profile.region }}</span>
+                    {% endif %}
+                    
+                    {% if profile.address %}
+                    <hr>
+                    <span>Lives in : {{ profile.address }}
+                                ,
+                            {% if profile.address_line_2 %}
+                                <span> {{ profile.address_line_2 }}</span>
+                                 {% endif %}
+                    </span>
+                     {% endif %}
+                    <br>connect via : {{profile.user.email}} 
+
+                   
+                </div>
+        </div>
+
+       
+    </div>
+
+
+</div>
+
+<hr>
+
+<div class="card-body  text-white">
+                <h2> Invite your Friends ! </h2> 
+                <p class="card-text ">Share our website with your firends   </p>
+
+              </div>
+ {% endfor %}
+
+
+{% endblock content %}

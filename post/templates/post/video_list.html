@@ -1,0 +1,202 @@
+{% extends "landing/main.html" %}
+{% load static %}
+
+{% block title %}
+ Watch on Leafnotion
+{% endblock title %}
+
+{% block navbar %}
+
+<nav>
+	 {% if user.profile.mediaURL %}
+<a href="{% url 'profile' user.profile.pk %}">
+ <img src="{{ user.profile.picture.url }}" class="rounded-circle p-1" width="40" height="40"  style="">
+</a>
+ {% endif %}
+<small class="text-muted">    
+<form class="form" action="{% url 'search-user' %}" method="get" style="float: right;">
+        <input class="flex-grow bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mr-4 mb-1 sm:mb-0 mt-0" type="search" name = 'queryuser' placeholder="Search friends.." aria-label="search" >
+        <!--<button  type = 'submit'><img src="/static/images/searchicon.png" style="width:20px; height:20px; margin-left:5px;" ></img> </button>-->
+        <button class="text-dark btn btn-sm btn-white active" type = 'submit'>
+           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg>
+</button>
+      </form>
+</small>
+            
+</nav>
+{% endblock navbar%}
+
+
+{% block content %}
+
+  <main id="main" class="bg bg-light mt-1 pt-1">
+
+
+
+
+	<div class="container  mb-5">
+		<div class="row mt-1 pt-1">
+			<nav class="navbar fixed-bottom navbar-light bg-white text-dark shadow-sm ">
+
+			  <a class="navbar-brand p-2" href="{% url 'post-list' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
+				  <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+				  <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+				</svg>
+			  </a>
+			  
+	
+
+			  <a class="navbar-brand p-2" href="{% url 'post-create' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+				  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+				  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+				</svg>
+			  </a>
+
+			  		  <a class="navbar-brand p-2" href="{% url 'video-create' %}">
+			  	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+				  <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+				  <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+				</svg>
+			  </a>
+
+			  <a class="navbar-brand p-2" href="{% url 'video-list' %}">
+			  	 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+				  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+				</svg>
+			</a>
+
+			  
+			</nav>
+		</div>
+
+
+		<div class="row mt-5 pt-5">
+
+		<div class="row mt-2 pt-2">
+			<h4>Be Social with  Leafnotion
+			 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-tv" viewBox="0 0 16 16">
+				  <path d="M2.5 13.5A.5.5 0 0 1 3 13h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zM13.991 3l.024.001a1.46 1.46 0 0 1 .538.143.757.757 0 0 1 .302.254c.067.1.145.277.145.602v5.991l-.001.024a1.464 1.464 0 0 1-.143.538.758.758 0 0 1-.254.302c-.1.067-.277.145-.602.145H2.009l-.024-.001a1.464 1.464 0 0 1-.538-.143.758.758 0 0 1-.302-.254C1.078 10.502 1 10.325 1 10V4.009l.001-.024a1.46 1.46 0 0 1 .143-.538.758.758 0 0 1 .254-.302C1.498 3.078 1.675 3 2 3h11.991zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
+				</svg> </h4>
+			<hr>
+
+
+		</div>
+			<div class="col-md-5 lg-6 sm-12 mb-4">
+				<div class="card bg bg-primary text-white shadow-sm" >
+					
+					<div class="card-body m-2 p-2">
+
+						<img src="{{ user.profile.picture.url }}" class=" " width="80" height="80" style="border-radius: 20px;" >
+					<hr>
+						<h4 style="font-weight: bolder;">Welcome, {{user.first_name}} {{user.last_name}} ! </h4>
+									
+					    <p style="font-size: 14px;" >
+                        <small class=" m-2 p-2">We all think unique, we all think smart, together we all are uniquely smart. Share your Smart Notion socially with other people around the globe. Create or Watch or Share videos on notion, with your new global friends. <b>"Connect with People not with Purpose"</b></small>
+						</p>
+						<hr>
+
+			  <a href="{% url 'video-create' %}" style="text-decoration: none; float: right;"> <button class="btn btn-sm btn-block btn-light"> Create  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+				  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+				</svg>
+				</button>
+				</a>
+
+					</div>
+				</div>
+			</div>
+
+
+			  				<div class="col-md-6 lg-6 sm-12 ">	
+			  					
+			  							{% for post in video_list %}	
+			  					
+			  					<div>
+
+								<div class="card m-2 shadow p-3 mb-5 bg-white rounded" style="width: inherit;"  >
+
+									<a href="{% url 'profile' post.author.profile.pk %}" style="text-decoration: none;" class="text-dark">
+										<h6 class="p-1" style="font-weight: bolder;">{{post.author.first_name}} {{post.author.last_name}} 
+										<span style="font-weight: lighter; font-size: 13px;">
+										 {% if post.mediaURL %}
+										  posted video
+										  {% else %}
+										  post notion
+										 {% endif %}
+										</span>
+								</h6></a>
+									 <small class="text-muted p-1">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+</svg>
+           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+  <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+</svg>                          
+                                     
+                                  <span style="font-size:8px">   {{post.published}} </span> </small>
+									 <hr>
+									{% if post.mediaURL %}
+									<video style="width: inherit; height: 300px;" controls downloads = False>
+										  <source src="{{post.mediaURL}}" type="video/mp4">
+							
+										</video>
+									{% endif %}
+
+									<div class="card-body">
+										
+										<p class="card-title" style="text-transform:capitalize;">{{post.subject}}</p>
+									
+									<hr>
+									<div class="btn-group" role="group" aria-label="reaction">
+
+									  <!-- comment -->
+									  <a href="{{post.pk}}" class=" font-weight-light" style="text-decoration: none;">
+									  See full Notion 
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+  <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+</svg> 
+									  	
+												<!-- <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-brush-fill" viewBox="0 0 16 16">
+			  									<path d="M15.825.12a.5.5 0 0 1 .132.584c-1.53 3.43-4.743 8.17-7.095 10.64a6.067 6.067 0 0 1-2.373 1.534c-.018.227-.06.538-.16.868-.201.659-.667 1.479-1.708 1.74a8.118 8.118 0 0 1-3.078.132 3.659 3.659 0 0 1-.562-.135 1.382 1.382 0 0 1-.466-.247.714.714 0 0 1-.204-.288.622.622 0 0 1 .004-.443c.095-.245.316-.38.461-.452.394-.197.625-.453.867-.826.095-.144.184-.297.287-.472l.117-.198c.151-.255.326-.54.546-.848.528-.739 1.201-.925 1.746-.896.126.007.243.025.348.048.062-.172.142-.38.238-.608.261-.619.658-1.419 1.187-2.069 2.176-2.67 6.18-6.206 9.117-8.104a.5.5 0 0 1 .596.04z"/>
+												</svg> -->
+									   </a>
+									  	<!-- share-notion-post --
+									  <button type="button" class="btn btn-outline-dark m-1">Share</button> --->
+									</div>
+			      					
+									</div>
+								</div>
+							</div>
+						
+							
+					{% endfor %}	
+
+			</div>
+
+
+		<!--	<div class="col-md-3 lg-6 sm-12">
+				<div class="card  active text-white shadow-sm" style="background-color: 	#FFA500;">
+					<p class="card-body">
+					<ul>						
+						
+				
+						<a class="text-white" style="text-decoration: none;" href="{% url 'profile' user.profile.pk %}" >Profile </a>
+						<hr>
+						<a class="text-white" style="text-decoration: none;" href="{% url 'setting' %}" > Setting </a>
+					</ul>				
+					</p>
+				</div>
+
+
+
+		</div> -->
+	</div>
+
+	
+</main>
+
+	
+{% endblock content %}
